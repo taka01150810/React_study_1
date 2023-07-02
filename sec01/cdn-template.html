@@ -15,11 +15,13 @@
     <div id="app">
 
     </div>
-    
-    <script>
+    <!-- type="text/babel" を追記する事でHTMLタグも表示できる -->
+    <!-- JSXはそのままではブラウザで表示できない -->
+    <!-- Babelを使い、JSに変換する事で描画できる -->
+    <script type="text/babel">
         const container = document.getElementById('app')
         const root = ReactDOM.createRoot(container)
-        const element = 'ハローリアクト'
+        const element = <p>ハローリアクト</p>
         root.render(element)
     </script>
 </body>
