@@ -22,10 +22,16 @@
 
         const handleClick = () => console.log('クリック')
         const handleClick2 = e => console.log(e.target.textContent)
+        const handleClick3 = int => console.log(`引数は${int}`)
 
         const element = <>
             <button onClick={handleClick}>クリック1</button>
             <button onClick={handleClick2}>クリック2</button>
+            { /* こう書くとNG (即実行される+動かない) */ }
+            { /* <button onClick={handleClick3(2)}>クリック3</button> */ }
+
+            { /* 引数がある場合はアロー関数で書く */ }
+            <button onClick={()=> handleClick3(2)}>クリック3</button>
         </>
 
         root.render(element)
