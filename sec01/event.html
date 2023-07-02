@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- Reactのメイン(web以外の利用も想定されている) -->
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+    <!-- Web向けに(DOMに)描画するためのライブラリ -->
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <!-- JSの新しいコードを旧コードに変換(コンパイル)する -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="app">
+
+    </div>
+
+    <script type="text/babel">
+        const container = document.getElementById('app')
+        const root = ReactDOM.createRoot(container)
+
+        const handleClick = () => console.log('クリック')
+        const handleClick2 = e => console.log(e.target.textContent)
+
+        const element = <>
+            <button onClick={handleClick}>クリック1</button>
+            <button onClick={handleClick2}>クリック2</button>
+        </>
+
+        root.render(element)
+    </script>
+</body>
+</html>
