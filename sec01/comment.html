@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- Reactのメイン(web以外の利用も想定されている) -->
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+    <!-- Web向けに(DOMに)描画するためのライブラリ -->
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <!-- JSの新しいコードを旧コードに変換(コンパイル)する -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="app">
+
+    </div>
+    <script type="text/babel">
+        const container = document.getElementById('app')
+        const root = ReactDOM.createRoot(container)
+
+        function testFunc(num1, num2){
+            return num1 + num2
+        }
+
+        const testArrowFunc = (num1, num2) => {
+            return num1 * num2
+        }
+        
+        const element = <p>
+            {// コメント
+            }
+            {/* コメント */}
+            { testFunc(2,3) }と{ testArrowFunc(2, 3) }
+        </p>
+        root.render(element)
+    </script>
+</body>
+</html>
