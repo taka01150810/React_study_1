@@ -21,8 +21,12 @@
         const ComponentTest = () => {
             const useState = React.useState // CDNの場合React.useStateで呼び出す
             const [ count, setCount ] = useState(0) // 初期値を定義
+
+            console.log(`コンポーネント表示時: ${count }`)
+
             const handleClick = () => {
                 setCount(count + 1) // 更新用の関数(ステート変数)
+                console.log(`関数内でsetCount実行後: ${count}`)
             }
             
             return (<>
