@@ -37,6 +37,16 @@
             return (<>
             親です。
             <ChildComponent members={ members } />
+            コンポーネントを複数表示
+            { members.map( member => (
+                <MemberList name={ member.name} />
+            ))}
+            </>)
+        }
+
+        const MemberList = props => {
+            return (<>
+            <div>{ props.name }</div>
             </>)
         }
 
