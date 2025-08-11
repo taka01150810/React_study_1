@@ -19,10 +19,19 @@
     
     const TabMenu = () => {
       const useState = React.useState
+      // タブの選択状態を管理するステート変数
       const [active, setActive ] = useState(1) 
 
       const activate = id => {
         console.log(id)
+        // read onlyエラーが起きる
+        // setActive(active = id)
+
+        // OK
+        // setActive(active => active = id)
+
+        // OK
+        setActive(id)
       }
       
       // タブのヘッダー情報
@@ -47,12 +56,30 @@
               items.map(
                 item => (
                   <li key={item.id}>
-                    <a className={ item.id === active && 'active' } href="#" onClick={()=> activate(item.id) }>{item.title}</a>  
+                    <a
+                    className={ item.id === active && 'active' } href="#"
+                    onClick={()=> activate(item.id)
+                    }>
+                    {item.title}
+                    </a>  
                   </li>
                 )
               )
             }
             </ul>
+          { active === 1 &&
+            <div className="tab__content">
+              サイトの情報タブの中身です。
+              </div>
+          }
+          { active === 2 &&
+            <div className="tab__content">
+              商品情報タブの中身です。</div>
+          }
+          { active === 3 &&
+            <div className="tab__content">
+              お問い合わせタブの中身です。</div>
+          }
         </section>
       </>)
     }
