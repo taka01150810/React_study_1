@@ -32,17 +32,39 @@
       const useState = React.useState
       const [ active, setActive ] = useState(0)
 
+      const currentImage = id => {
+        setActive( active => active = id )
+      }
+
+      const prevImage = () => {
+        if( active <= 0){
+          setActive( active => active = images.length - 1)
+        } else {
+          setActive( active -1 )
+        }
+      }
+
+      const nextImage = () => {
+        if( active >= images.length -1){
+            setActive( active => active = 0 )
+        } else {
+            setActive( active + 1)
+         }
+      }
 
       return (<>
         <section className="carousel">
           <div className="carousel__main">
             <img src={ images[active].img} />
-          </div>
-          <div className="carousel__prev" ><i className="fas fa-angle-left fa-5x"></i></div>
-          <div className="carousel__next" ><i className="fas fa-angle-right fa-5x"></i></div>
+            </div>
+          <div className="carousel__prev" onClick={ prevImage } ><i className="fas fa-angle-left fa-5x"></i></div>
+          <div className="carousel__next" onClick={ nextImage } ><i className="fas fa-angle-right fa-5x"></i></div>
           <ul className="carousel__thumbnails">
             { images.map( image => (
-              <li key={ image.id }>
+              <li key={ image.id }
+                className={ active === image.id && 'current' }
+                onClick={()=> currentImage(image.id) }
+              >
                 <img src={ image.img} />
               </li>
             )) }
