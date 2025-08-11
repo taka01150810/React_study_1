@@ -16,9 +16,52 @@
   <script type="text/babel">
     const container = document.getElementById('app')
     const root = ReactDOM.createRoot(container)
-    root.render(<>
-    <TabMenu />
-    </>)
+    
+    const TabMenu = () => {
+      const useState = React.useState
+      const [active, setActive ] = useState(1) 
+
+      const activate = id => {
+        console.log(id)
+      }
+      
+      // タブのヘッダー情報
+      const items = [
+        {
+          id: 1,
+          title: 'サイトの情報'
+        }, {
+          id: 2,
+          title: '商品情報'
+        }, {
+          id: 3,
+          title: 'お問い合わせ'
+        }
+      ]
+
+      return (<>
+      {/* タグをmapで繰り返し、タブのヘッダー情報を表示 */}
+        <section className="tab">
+          <ul className="tab__label">
+            {
+              items.map(
+                item => (
+                  <li key={item.id}>
+                    <a className={ item.id === active && 'active' } href="#" onClick={()=> activate(item.id) }>{item.title}</a>  
+                  </li>
+                )
+              )
+            }
+            </ul>
+        </section>
+      </>)
+    }
+
+    root.render(
+      <>
+      <TabMenu />
+      </>
+    )
   </script>
 
 </body>
