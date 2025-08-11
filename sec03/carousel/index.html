@@ -18,7 +18,47 @@
     const container = document.getElementById('app')
     const root = ReactDOM.createRoot(container)
     
-    root.render()
+    const Carousel = () => {
+      const images = [
+        { id: 0, img: 'images/image000.jpg'},
+        { id: 1, img: 'images/image001.jpg'},
+        { id: 2, img: 'images/image002.jpg'},
+        { id: 3, img: 'images/image003.jpg'},
+        { id: 4, img: 'images/image004.jpg'},
+        { id: 5, img: 'images/image005.jpg'},
+        { id: 6, img: 'images/image006.jpg'},
+      ]
+
+      const useState = React.useState
+      const [ active, setActive ] = useState(0)
+
+
+      return (<>
+        <section className="carousel">
+          <div className="carousel__main">
+            <img src={ images[active].img} />
+          </div>
+          <div className="carousel__prev" ><i className="fas fa-angle-left fa-5x"></i></div>
+          <div className="carousel__next" ><i className="fas fa-angle-right fa-5x"></i></div>
+          <ul className="carousel__thumbnails">
+            { images.map( image => (
+              <li key={ image.id }>
+                <img src={ image.img} />
+              </li>
+            )) }
+            </ul>
+
+        </section>
+
+      </>)
+
+    }
+
+    root.render(
+      <>
+      <Carousel />
+      </>
+    )
   </script>
 </body>
 </html>
