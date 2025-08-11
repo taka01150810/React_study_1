@@ -18,7 +18,31 @@
     const container = document.getElementById('app')
     const root = ReactDOM.createRoot(container)
     
-    root.render()
+    const ModalWindow = () => {
+      const useState = React.useState
+      const [ modalStatus, setModalStatus ] = useState(false)
+
+      const toggleModal = () => setModalStatus(!modalStatus)
+
+      return (<>
+        <button onClick={toggleModal}>画像を表示</button>
+
+        <div style={{ display: modalStatus ? 'initial' : 'none' }}>
+          <div className="modal__inner">
+            {/* モーダルウィンドウを閉じるボタン */}
+            <div className="modal__close" onClick={()=> setModalStatus(!modalStatus) }><i className="fas fa-times"></i></div>
+            <img src="image001.jpg" />
+          </div>
+          <div className="modal__background" onClick={toggleModal}></div>
+        </div>
+      </>)
+    }
+
+    root.render(
+      <>
+      <ModalWindow />
+      </>
+    )
   </script>
 </body>
 </html>
