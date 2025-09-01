@@ -18,10 +18,19 @@
     
     const ControlledForm = () => {
       const useState = React.useState
-      const [ name, setName ] = useState('')
+      const [ form, setForm ] = useState({
+        name: '',
+        email: ''
+      })
 
-      const handleChange = e => setName(e.target.value)
-
+      const handleChange = e => {
+        const { name, value } = e.target // 分割代入
+        setForm({
+          ...form,  // スプレッド構文
+          [name]: value // [key] : value と書く(setStateのルール)
+        })
+      }
+      
       const handleSubmit = e => {
         e.preventDefault() // ブラウザ再読込を回避
         console.log(e)
@@ -32,9 +41,9 @@
           {/* submitイベントで実行 */}
           <form onSubmit={handleSubmit}>
             {/* JSのforと分けるためにhtmlFor */}
-            <label htmlFor="name">名前</label>
+            <input type="text" name="name" value={form.name} onChange={handleChange} />
             {/* onChangeで変更時に更新 */}
-            <input id="name" type="text" name="name" value={name} onChange={handleChange} />
+            <input type="email" name="email" value={form.email} onChange={handleChange} />
             <button>送信</button>
           </form>
         </>
