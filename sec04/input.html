@@ -19,18 +19,31 @@
     const ControlledForm = () => {
       const useState = React.useState
       const [ form, setForm ] = useState({
-        caution: false
+        qurious: []
       })
-
+      
+      // useStateで配列を扱う際は新しい配列を生成して保存しないと再描画されない
       const handleChange = e => {
-        console.log(e)
-        // const {name, value } = e.target
-        const name = e.target.name
-        const value = name === 'caution' ? e.target.checked : e.target.value 
-        setForm({
-          ...form,
-          [name]: value
-        })
+        const {name, value } = e.target
+
+        if(form.qurious.includes(value)){
+          // 新しい配列を作成
+          const list = form.qurious.filter( q => q !== value )
+          setForm({
+            ...form,
+            [name]: list
+          })
+        } else {
+          const list = [
+            ...form.qurious,
+            value
+          ]
+
+          setForm({
+            ...form,
+            [name]: list
+          })
+        }
       }
       
       const handleSubmit = e => {
@@ -38,16 +51,12 @@
         console.log(form)
       }
 
-      const ages = [
-        {id: 0, generation: '選択してください'},
-        {id: 1, generation: '10代'}, {id: 2, generation: '20代'},
-        {id: 3, generation: '30代'}, {id: 4, generation: '40代'},
-        {id: 5, generation: '50代'}, {id: 6, generation: '60代〜'},
-      ]
-
       return (<>
         <form onSubmit={handleSubmit}>
-          <input type="checkbox" name="caution" onChange={handleChange} />注意事項に同意する
+          興味があるもの(複数回答可)<br />
+          <input type="checkbox" name="qurious" value="sports" onChange={handleChange} />スポーツ
+          <input type="checkbox" name="qurious" value="news" onChange={handleChange} />ニュース
+          <input type="checkbox" name="qurious" value="it" onChange={handleChange} />IT系   
           <button>送信</button>
         </form>
       </>)
