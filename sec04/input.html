@@ -20,7 +20,9 @@
       const useState = React.useState
       const [ form, setForm ] = useState({
         name: '',
-        email: ''
+        email: '',
+        gender: '',
+        contact: ''
       })
 
       const handleChange = e => {
@@ -38,12 +40,23 @@
 
       return (
         <>
-          {/* submitイベントで実行 */}
           <form onSubmit={handleSubmit}>
-            {/* JSのforと分けるためにhtmlFor */}
-            <input type="text" name="name" value={form.name} onChange={handleChange} />
-            {/* onChangeで変更時に更新 */}
-            <input type="email" name="email" value={form.email} onChange={handleChange} />
+            <label htmlFor="name">名前</label>
+            <input id="name" type="text" name="name" value={form.name} onChange={handleChange} /><br />
+            <label htmlFor="email">メールアドレス</label>
+            <input id="email" type="email" name="email" value={form.email} onChange={handleChange} /><br />
+
+            <legend>性別</legend><br />
+            <label htmlFor="gender_male">男性</label>
+            <input id="gender_male" type="radio" name="gender" value="male" onChange={handleChange} /><br />
+            <label htmlFor="gender_female">女性</label>
+            <input id="gender_female" type="radio" name="gender" value="female" onChange={handleChange} /><br />
+            <label htmlFor="gender_other">その他</label>
+            <input id="gender_other" type="radio" name="gender" value="other" onChange={handleChange} /><br />
+            
+            <label htmlFor="contact">お問合せ内容</label><br />
+            <textarea id="contact" name="contact" value={form.contact} onChange={handleChange}></textarea>
+
             <button>送信</button>
           </form>
         </>
