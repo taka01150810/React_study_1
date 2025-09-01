@@ -20,6 +20,7 @@
     const UncontrolledForm = () => {
       const useRef = React.useRef
       const nameRef = useRef('')
+      const fileInput = useRef('')
 
       // useStateと違って再レンダリングされない
       console.log('レンダリング')
@@ -28,13 +29,15 @@
       const handleSubmit = e => {
         e.preventDefault() // ブラウザ再読込を回避
         // currentで情報を取得できる
-        console.log(nameRef.current.value)
+        // console.log(nameRef.current.value)
+        console.log(fileInput.current.files[0].name)
       }
 
       return (<>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} enctype="multipart/form-data">
           {/* DOMに ref属性で参照できる */}
           名前:<input name="name" type="text" ref={nameRef} />
+          <input name="file" type="file" ref={fileInput} />
           <button>送信</button>
         </form>
       </>)
