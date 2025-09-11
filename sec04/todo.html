@@ -46,6 +46,13 @@
         setItem('')
       }
 
+      // indexと同じでなかったら新しい配列に追加
+      // filter()の第２引数は配列のインデックスを取得できる
+      const deleteItem = id => {
+        const newList = todos.filter((todo, index) => id !== index ? todo : null )
+        setTodo(newList)
+      }
+
       return (<>
       {/* 引数にeでイベントオブジェクトを取得できる */}
       <input type="text" value={item} onChange={e => setItem( item => item = e.target.value )} />
@@ -55,7 +62,8 @@
         { todos.map(( todo, index) => (
           <li>
             <span className={ todo.isDone && 'done'}>{ todo.item }</span>
-            </li>
+            <button onClick={()=> deleteItem(index)}>削除</button>
+          </li>
         ))}
       </ul>
 
