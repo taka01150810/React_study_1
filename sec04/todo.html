@@ -53,6 +53,19 @@
         setTodo(newList)
       }
 
+      const handleChange = (id, e) => {
+        // filterの第２引数は配列のインデックス
+        const newList = todos.filter((todo, index) => {
+          if(id === index){
+            todo.isDone = e.target.checked
+            return todo
+          } else {
+            return todo
+          }
+        })
+        setTodo(newList)
+      }
+
       return (<>
       {/* 引数にeでイベントオブジェクトを取得できる */}
       <input type="text" value={item} onChange={e => setItem( item => item = e.target.value )} />
@@ -61,6 +74,7 @@
       <ul>
         { todos.map(( todo, index) => (
           <li>
+            <input type="checkbox" checked={ todo.isDone} onChange={ e => handleChange(index, e)} />
             <span className={ todo.isDone && 'done'}>{ todo.item }</span>
             <button onClick={()=> deleteItem(index)}>削除</button>
           </li>
