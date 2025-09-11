@@ -22,12 +22,17 @@
     
     const TodoList = () => {
       const useState = React.useState
+      const useEffect = React.useEffect
+
       const [ item, setItem ] = useState('')
       // オブジェクトの配列で持たせる
       const [ todos, setTodo ] = useState([
         { item: 'あああ', isDone: false }
       ])
 
+      const [ searchValue, setSearchValue ] = useState('')
+      const [ filteredList, setFilteredList ] = useState([])
+  
       // 追加用関数
       const addItem = () => {
         // 空だったら処理を終わらせる
@@ -66,19 +71,39 @@
         setTodo(newList)
       }
 
+      // searchValue変更時にuseEffect実行される
+      useEffect(()=>{
+        // 検索機能
+        const newList = todos.filter( todo => {
+          return todo.item.indexOf(searchValue) !== -1
+        })
+        // 検索結果をsetFilteredListで更新
+        setFilteredList(newList)
+      }, [searchValue])
+
       return (<>
       {/* 引数にeでイベントオブジェクトを取得できる */}
       <input type="text" value={item} onChange={e => setItem( item => item = e.target.value )} />
       <button onClick={addItem}>追加</button>
+      <input type="text" value={searchValue} onChange={e => setSearchValue(e.target.value)} />
 
       <ul>
-        { todos.map(( todo, index) => (
+        {/* 検索結果が空の場合は元のリストを表示 */}
+        { !searchValue ? todos.map(( todo, index) => (
           <li>
             <input type="checkbox" checked={ todo.isDone} onChange={ e => handleChange(index, e)} />
             <span className={ todo.isDone && 'done'}>{ todo.item }</span>
             <button onClick={()=> deleteItem(index)}>削除</button>
           </li>
-        ))}
+        )) : null }
+        {/* 検索結果がある場合は検索結果のリストを表示 */}
+        { searchValue ? filteredList.map(( todo, index) => (
+          <li>
+            <input type="checkbox" checked={ todo.isDone} onChange={ e => handleChange(index, e)} />
+            <span className={ todo.isDone && 'done'}>{ todo.item }</span>
+            <button onClick={()=> deleteItem(index)}>削除</button>
+          </li>
+        )) : null }
       </ul>
 
       </>)
