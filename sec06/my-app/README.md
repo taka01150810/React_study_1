@@ -460,3 +460,10 @@ Files prefixed with `demo` can be safely deleted. They are there to provide a st
 # Learn More
 
 You can learn more about all of the offerings from TanStack in the [TanStack documentation](https://tanstack.com).
+
+
+
+・create-react-appを使う事で本格的な開発環境を簡単に作成できる
+・import/exportを使いコンポーネントを読み込みページを構成していく
+・基本的に1ファイル1コンポーネント
+・CSS設定方法は複数存在する。2022年現在は CSS in JSが増えている。

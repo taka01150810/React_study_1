@@ -1,5 +1,10 @@
 // Emotionをインポート
 import {css} from '@emotion/react'
+import styled from '@emotion/styled'
+
+const Hello = styled.h2`
+  color: ${ props => props.blue ? "blue" : "red" };
+`
 
 // コメント追記の必要あり
 /** @jsxImportSource @emotion/react */
@@ -24,6 +29,9 @@ const EmotionComponent = () => {
 
     <h2 css={[largeFont, fontRed]}>複数のパターン</h2>
     <h2 css={fontRed}>継承のパターン</h2>
+
+    <Hello blue>青文字コンポーネント</Hello>
+    <Hello red>赤文字コンポーネント</Hello>
   </>)
 
 }
