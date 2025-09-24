@@ -17,8 +17,13 @@ const Wrapper = styled.div`
   border: 1px solid red;
 `
 
-const Title = styled.h1`
+const BaseTitle = styled.h1`
   color: blue;
+`
+
+// styled(継承したい変数を指定)
+const Title = styled(BaseTitle)`
+  background-color: lightgray;
 `
 
 export default StyledComponent
