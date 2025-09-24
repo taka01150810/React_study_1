@@ -467,3 +467,27 @@ You can learn more about all of the offerings from TanStack in the [TanStack doc
 ・import/exportを使いコンポーネントを読み込みページを構成していく
 ・基本的に1ファイル1コンポーネント
 ・CSS設定方法は複数存在する。2022年現在は CSS in JSが増えている。
+
+Single Page Application
+初回表示時に全ページを読み込む
+以降はJSON形式で必要な箇所だけ更新
+
+メリット
+ページ移動がスムーズ
+より高度なWeb表現
+ネイティブアプリの代用(PWA)
+
+デメリット
+初回ページ読み込みに時間がかかる
+実装コストがかかる
+SEOが十分でない(改善中) ->対策 SSR SSG 他
+
+react-router-dom
+reactでSPAを実現するライブラリ
+https://reactrouter.com/en/6.6.0
+
+*SPA実現方法は複数ある Next.jsでは別の方法
+
+// インストール
+npx create-react-app@5.0.1 router-test
+npm install react-router-dom@6.6.0
