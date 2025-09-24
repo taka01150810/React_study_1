@@ -4,6 +4,7 @@ import TestComponent from "./components/TestComponent";
 import GetItemComponent from "./components/GetItemComponent";
 import StyledComponent from "./components/StyledComponent";
 import StyledUseStateProps from "./components/StyledUseStateProps";
+import EmotionComponent from "./components/EmotionComponent";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <GetItemComponent />
       <StyledComponent />
       <StyledUseStateProps />
+      <EmotionComponent />
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
