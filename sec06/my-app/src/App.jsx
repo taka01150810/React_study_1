@@ -3,6 +3,7 @@ import "./App.css";
 import TestComponent from "./components/TestComponent";
 import GetItemComponent from "./components/GetItemComponent";
 import StyledComponent from "./components/StyledComponent";
+import StyledUseStateProps from "./components/StyledUseStateProps";
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       <TestComponent />
       <GetItemComponent />
       <StyledComponent />
+      <StyledUseStateProps />
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
