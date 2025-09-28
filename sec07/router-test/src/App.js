@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import Information from './pages/Information';
 import Contact from './pages/Contact';
 import NotFound from './pages/NotFound';
+import Layout from './Layout';
 
 function App() {
   // 認証していたら表示、していなかったらリダイレクトする
@@ -14,13 +15,13 @@ function App() {
     <>
       {/* Routesで切り替えたいRouteを囲む */}
       <Routes>
-        {/* Routeでコンポーネントを指定することができる */}
-        {/* ※ver5ではRoutesではなくSwitchを使用する */}
-        <Route path="/" element={<Home />} />
-        <Route path="/information" element={<Information />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/auth" element={isAuthenticated ? <Navigate to="/contact" /> : <Home /> } />
-        <Route path="*" element={<NotFound />} />
+        <Route element={<Layout />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/information" element={<Information />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/auth" element={isAuthenticated ? <Navigate to="/contact" /> : <Home /> } />
+          <Route path="*" element={<NotFound />} />
+        </Route>
       </Routes>
     </>
   );
