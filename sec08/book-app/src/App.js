@@ -6,35 +6,11 @@ import BookIndex from './pages/books/BookIndex';
 import BookDetail from './pages/books/BookDetail';
 import BookEdit from './pages/books/BookEdit';
 import BookSearch from './pages/books/BookSearch';
-import { useState } from 'react'
-import { useEffect } from 'react'
+import { usePersist } from './hooks/usePersist'
 
 function App() {
   const STORAGE_KEY = 'books'
-  // 本の情報 配列
-  // localStorageのデータが消える件
-  // コンポーネントの再レンダリングによるuseState初期値を空にしているので、空の状態で上書きしてしまう
-  const [ books, setBooks ] = useState(()=>{
-    const saved = localStorage.getItem(STORAGE_KEY);
-    const initialValue = JSON.parse(saved);
-    return initialValue || [] ;
-  })
-
-  // 初回マウント時に localStorage内データを useStateに持たせる
-  useEffect(()=>{
-    if(localStorage.getItem(STORAGE_KEY)){
-      try{
-        setBooks(JSON.parse(localStorage.getItem(STORAGE_KEY)))
-      } catch(e){
-        console.log(e)
-      }
-    }
-  }, [])
-
-  // booksが更新されたらlocalStorageにも保存する
-  useEffect(()=>{
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(books))
-  }, [books])
+  const [books, setBooks] = usePersist(STORAGE_KEY)
 
   return (
     <>
