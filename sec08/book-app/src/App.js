@@ -12,7 +12,13 @@ import { useEffect } from 'react'
 function App() {
   const STORAGE_KEY = 'books'
   // 本の情報 配列
-  const [books, setBooks ] = useState([])
+  // localStorageのデータが消える件
+  // コンポーネントの再レンダリングによるuseState初期値を空にしているので、空の状態で上書きしてしまう
+  const [ books, setBooks ] = useState(()=>{
+    const saved = localStorage.getItem(STORAGE_KEY);
+    const initialValue = JSON.parse(saved);
+    return initialValue || [] ;
+  })
 
   // 初回マウント時に localStorage内データを useStateに持たせる
   useEffect(()=>{
