@@ -17,6 +17,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import ja from 'date-fns/locale/ja'
 import { useNavigate } from 'react-router-dom'
+import { format } from 'date-fns';
 
 const BookDetail = ({ books, setBooks }) => {
   const params = useParams()
@@ -28,6 +29,10 @@ const BookDetail = ({ books, setBooks }) => {
 
   const [ value, setValue ] = useState(book.readDate)
   const [ memo, setMemo ] = useState(book.memo)
+
+  const setNewValue = newValue => {
+    setValue(format(newValue, 'yyyy/MM/dd'))
+  }
 
   const updateBookInfo = bookId => {
     const newList = books.filter( book => {
@@ -73,7 +78,7 @@ const BookDetail = ({ books, setBooks }) => {
                 // 日付をセットする
                 value={value}
                 onChange={(newValue) => {
-                  setValue(newValue);
+                  setNewValue(newValue);
                 }}
                 renderInput={(params) => <TextField {...params} />}
               />
