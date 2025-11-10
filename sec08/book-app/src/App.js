@@ -43,6 +43,7 @@ function App() {
         <Route index element={<BookIndex books={books} />} />
         <Route path="search" element={<BookSearch books={books} setBooks={setBooks} />} />
         <Route path="edit" element={<BookEdit />} >
+          {/* setBooksで本の情報を更新する */}
           <Route path=":id" element={<BookDetail books={books} setBooks={setBooks}/>} />
         </Route>
         <Route path="mui-test" element={<MuiTest />} />
