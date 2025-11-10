@@ -15,10 +15,13 @@ import {
 import { Link } from 'react-router-dom'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import AddIcon from '@mui/icons-material/Add'
+import { useNavigate } from 'react-router-dom'
 
+// 親からbooksとsetBooksを引数として受け取る
 const BookSearch = ({ books, setBooks }) => {
   const keyword = useRef('')
   const [searchResult, setSearchResult] = useState([])
+  const navigate = useNavigate()
 
   const search = async (keyword, e) => {
     e.preventDefault()
@@ -42,6 +45,29 @@ const BookSearch = ({ books, setBooks }) => {
       }
     })
     setSearchResult(newList)
+  }
+
+  const addBook = card => {
+    console.log("card", card)
+
+    // booksがあれば最新のid + 1, なければ1
+    const newId = books.length !== 0 ? books.slice(-1)[0].id + 1 : 1
+    console.log(newId)
+    // id, title, description, imageの他に、読んだ日、メモも追加 
+    const newBook = {
+      id: newId,
+      title: card.title,
+      description: card.description,
+      image: card.image,
+      readDate: '',
+      memo: ''
+    } 
+    setBooks([
+      ...books,
+      newBook
+    ])
+    // 更新後にリダイレクト
+    navigate(`/edit/${newId}`)
   }
 
   return (
@@ -116,7 +142,7 @@ const BookSearch = ({ books, setBooks }) => {
                       </Typography>
                     </CardContent>
                     <CardActions>
-                      <Fab color="primary">
+                      <Fab color="primary" onClick={()=> addBook(card)}>
                         <AddIcon />
                       </Fab>
                     </CardActions>
