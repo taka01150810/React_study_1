@@ -11,9 +11,14 @@ import {
   CardActions
 } from '@mui/material'
 import { useParams, Link } from 'react-router-dom'
-
+import { useState } from 'react';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import ja from 'date-fns/locale/ja'
 
 const BookDetail = ({ books }) => {
+  const [ value, setValue ] = useState(null)
   const params = useParams()
   const book = books.find( book => {
     return book.id === parseInt(params.id, 10)
@@ -38,6 +43,22 @@ const BookDetail = ({ books }) => {
             </Typography>
             <Box sx={{ mb:2 }}>
               読んだ日: 
+              <LocalizationProvider
+                dateAdapter={AdapterDateFns}
+                adapterLocale={ja} 
+                dateFormats={{ monthAndYear: "yyyy年 MM月" }}
+              >
+              <DatePicker
+                label="日付"
+                // 当日以降を選べないようにする
+                maxDate={new Date()} 
+                value={value}
+                onChange={(newValue) => {
+                  setValue(newValue);
+                }}
+                renderInput={(params) => <TextField {...params} />}
+              />
+            </LocalizationProvider>
             </Box>
             <Box>
               感想: <br/>
